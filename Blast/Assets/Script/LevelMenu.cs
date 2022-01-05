@@ -7,7 +7,8 @@ public class LevelMenu : MonoBehaviour
 {
     public void level1()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GlobalVariable.level = 1;
+        SceneManager.LoadScene("Game");
     }
 
     public void level2()
