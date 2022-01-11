@@ -38,6 +38,6 @@ public class PeluruControll : MonoBehaviour
         if (col.tag == "Meteor")
         {
             Destroy(gameObject);
-        }
+        } 
     }
 }

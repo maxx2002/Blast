@@ -12,6 +12,8 @@ public enum GameManagerState
 public class GameManagerGO : MonoBehaviour
 {
     public GameObject start;
+    public GameObject playagain;
+    public GameObject backhome;
     public GameObject rocket;
     public GameObject meteorSpawner;
     public GameObject GameOverGO;
@@ -21,7 +23,7 @@ public class GameManagerGO : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GMstate = GameManagerState.Opening;
+        GMstate = GameManagerState.Gameplay;
     }
 
     // Update is called once per frame
@@ -31,10 +33,12 @@ public class GameManagerGO : MonoBehaviour
         {
             case GameManagerState.Opening:
                 GameOverGO.SetActive(false);
-
+                backhome.SetActive(false);
+                playagain.SetActive(false);
                 start.SetActive(true);
                 break;
             case GameManagerState.Gameplay:
+              
                 start.SetActive(false);
 
                 rocket.GetComponent<RoketControll>().Init();
@@ -43,11 +47,10 @@ public class GameManagerGO : MonoBehaviour
                 break;
             case GameManagerState.GameOver:
                 meteorSpawner.GetComponent<MeteorSpawn>().UnscheduleMeteorSpawner();
-
+                backhome.SetActive(true);
+                playagain.SetActive(true);
                 GameOverGO.SetActive(true);
 
-                Invoke("ChangeToOpeningState", 8f);
-                // SceneManager.LoadScene("PlayAgain");
                 break;
         }
     }
@@ -67,6 +70,11 @@ public class GameManagerGO : MonoBehaviour
     public void ChangeToOpeningState()
     {
         SetGameManagerState(GameManagerState.Opening);
+    }
+
+    public void BackToHome()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 
 

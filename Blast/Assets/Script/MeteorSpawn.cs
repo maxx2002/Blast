@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MeteorSpawn : MonoBehaviour
 {
+    public GameObject GameManagerGO;
     public GameObject Meteor1;
     public GameObject Meteor2;
     public GameObject Meteor3;
@@ -14,6 +15,7 @@ public class MeteorSpawn : MonoBehaviour
     public GameObject Meteor8;
     public GameObject Meteor9;
     public GameObject Meteor10;
+    public GameObject HealthBar;
 
     float maxSpawnRateInSeconds = 5f;
     private GameObject obj;
@@ -31,6 +33,19 @@ public class MeteorSpawn : MonoBehaviour
     
     void SpawnMeteor()
     {
+        if (GlobalVariable.level == 1)
+        {
+            this.maxSpawnRateInSeconds = 3f;
+        }
+        else if (GlobalVariable.level == 2)
+        {
+            this.maxSpawnRateInSeconds = 2f;
+        }
+        else if (GlobalVariable.level == 3)
+        {
+            this.maxSpawnRateInSeconds = 1f;
+        }
+
         int i = Random.Range(1, 12);
         switch (i)
         {
@@ -63,6 +78,9 @@ public class MeteorSpawn : MonoBehaviour
                 break;
             case 10:
                 obj = Meteor10;
+                break;
+            case 11:
+                obj = HealthBar;
                 break;
         }
         //Posisi layar kiri bawah

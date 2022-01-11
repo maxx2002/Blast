@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MeteorControll : MonoBehaviour
+public class HealthBarControll : MonoBehaviour
 {
-    GameObject TextScoreUI;
-
+   
     float speed;
 
     // Start is called before the first frame update
@@ -21,9 +20,8 @@ public class MeteorControll : MonoBehaviour
         else if (GlobalVariable.level == 3)
         {
             speed = 6f;
-        }    
-       
-        TextScoreUI = GameObject.FindGameObjectWithTag("ScoreGame");
+        }
+
     }
 
     // Update is called once per frame
@@ -42,16 +40,15 @@ public class MeteorControll : MonoBehaviour
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 
         //Jika meteor keluar layar maka destroy meteor
-        if(transform.position.x < min.x)
+        if (transform.position.x < min.x)
         {
             Destroy(gameObject);
         }
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if ((col.tag == "Peluru")||(col.tag == "Roket"))
+        if (col.tag == "Roket")
         {
-            TextScoreUI.GetComponent<GameScoring>().Score += 10;
             Destroy(gameObject);
         }
     }

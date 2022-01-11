@@ -28,16 +28,11 @@ public class RoketControll : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {
-       
-
+    { 
         audio = GetComponent<AudioSource>();
 
         //reset position
         transform.position = new Vector2(0, 0);
-        
-        
-        
     }
 
     // Update is called once per frame
@@ -88,7 +83,7 @@ public class RoketControll : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if((col.tag == "Meteor") || (col.tag == "Bomb"))
+        if((col.tag == "Meteor"))
         {
             life--;
             TextLife.text = life.ToString();
@@ -97,7 +92,12 @@ public class RoketControll : MonoBehaviour
                 GameManagerGO.GetComponent<GameManagerGO>().SetGameManagerState(GameManagerState.GameOver);
                 gameObject.SetActive(false);
             }
-            
+        }
+
+        if ((col.tag == "HealthBar"))
+        {
+                life++;
+                TextLife.text = life.ToString();
         }
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Meteor
   - Bomb
   - ScoreGame
+  - HealthBar
   layers:
   - Default
   - TransparentFX
