@@ -14,17 +14,13 @@ public class MeteorSpawn : MonoBehaviour
     public GameObject Meteor8;
     public GameObject Meteor9;
     public GameObject Meteor10;
-    public GameObject Bomb;
+
     float maxSpawnRateInSeconds = 5f;
     private GameObject obj;
     // Start is called before the first frame update
     void Start()
     {
-        //Invoke untuk memanggil function di suatu kecepatan
-        Invoke("SpawnMeteor", maxSpawnRateInSeconds);
-
-        //Naikin spawn rate setiap 30 detik
-        InvokeRepeating("TingkatinKecepatanSpawn", 0f, 30f);
+        
     }
 
     // Update is called once per frame
@@ -68,9 +64,6 @@ public class MeteorSpawn : MonoBehaviour
             case 10:
                 obj = Meteor10;
                 break;
-            case 11:
-                obj = Bomb;
-                break;
         }
         //Posisi layar kiri bawah
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
@@ -107,7 +100,22 @@ public class MeteorSpawn : MonoBehaviour
     {
         if (maxSpawnRateInSeconds > 1f)
             maxSpawnRateInSeconds--;
+
         if (maxSpawnRateInSeconds == 1f)
-            CancelInvoke("IncreaseSpawnRate");
+            CancelInvoke("TingkatinKecepatanSpawn");
+    }
+
+    public void ScheduledMeteorSpawner()
+    {
+        //Invoke untuk memanggil function di suatu kecepatan
+        Invoke("SpawnMeteor", maxSpawnRateInSeconds);
+
+        //Naikin spawn rate setiap 30 detik
+        InvokeRepeating("TingkatinKecepatanSpawn", 0f, 30f);
+    }
+    public void UnscheduleMeteorSpawner()
+    {
+        CancelInvoke("SpawnMeteor");
+        CancelInvoke("TingkatinKecepatanSpawn");
     }
 }

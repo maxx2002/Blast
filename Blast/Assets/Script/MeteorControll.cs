@@ -41,8 +41,9 @@ public class MeteorControll : MonoBehaviour
     {
         if ((col.tag == "Peluru")||(col.tag == "Roket"))
         {
-            TextScoreUI.GetComponent<GameScoring>().Score += 100;
+            TextScoreUI.GetComponent<GameScoring>().Score += 10;
             Destroy(gameObject);
         }
+
     }
 }

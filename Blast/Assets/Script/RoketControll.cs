@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class RoketControll : MonoBehaviour
 {
+    public GameObject GameManagerGO;
     public GameObject Peluru;
     public GameObject PosisiPeluru;
 
@@ -14,22 +15,29 @@ public class RoketControll : MonoBehaviour
     int life;
 
     public float speed;
+    AudioSource audio;
 
     public void Init()
-    {
-        
-    }
-    // Start is called before the first frame update
-    void Start()
     {
         life = Maxlife;
 
         TextLife.text = life.ToString();
 
+        gameObject.SetActive(true);
+
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+       
+
+        audio = GetComponent<AudioSource>();
+
         //reset position
         transform.position = new Vector2(0, 0);
-
-        gameObject.SetActive(true);
+        
+        
+        
     }
 
     // Update is called once per frame
@@ -38,6 +46,9 @@ public class RoketControll : MonoBehaviour
         //Tembak peluru jika pencet spasi
         if(Input.GetKeyDown("space"))
         {
+            //play laser shoot
+            audio.Play();
+
             GameObject ObjectPeluru = (GameObject)Instantiate(Peluru);
             ObjectPeluru.transform.position = PosisiPeluru.transform.position;
         }
@@ -83,6 +94,7 @@ public class RoketControll : MonoBehaviour
             TextLife.text = life.ToString();
             if(life == 0)
             {
+                GameManagerGO.GetComponent<GameManagerGO>().SetGameManagerState(GameManagerState.GameOver);
                 gameObject.SetActive(false);
             }
             

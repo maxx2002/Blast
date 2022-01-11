@@ -14,6 +14,7 @@ public class PeluruControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //Dapatin posisi peluru
         Vector2 posisi = transform.position;
 
